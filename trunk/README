@@ -1,0 +1,20 @@
+XMLSQL - query SQL database and get result as XML string
+
+Copyright (c) 2004-2005 by Tomas Zeman <tzeman@volny.cz>
+
+Licensed under the terms of General Public License.
+This software is provided 'as is' with no warranty.
+
+
+Documentation
+=============
+Module is documented in POD in XMLSQL.pm package.
+
+Installation
+============
+
+	perl Makefile.PL
+	make
+	make install
+
+
