@@ -1,0 +1,5 @@
+Makefile.PL
+lib/XMLSQL.pm
+Changes
+README
+META.yml                                 Module meta-data (added by MakeMaker)
