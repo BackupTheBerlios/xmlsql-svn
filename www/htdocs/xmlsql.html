@@ -1,0 +1,112 @@
+<p><a name="__index__"></a></p>
+<!-- INDEX BEGIN -->
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<li><a href="#synopsis">SYNOPSIS</a></li>
+	<li><a href="#description">DESCRIPTION</a></li>
+	<li><a href="#methods">METHODS</a></li>
+	<li><a href="#author">AUTHOR</a></li>
+</ul>
+<!-- INDEX END -->
+
+<hr />
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>XMLSQL - Query SQL database and get result as XML string</p>
+<p>
+</p>
+<hr />
+<h1><a name="synopsis">SYNOPSIS</a></h1>
+<pre>
+  use XMLSQL;
+  use DBI;</pre>
+<pre>
+  my $dbh = DBI-&gt;connect(&quot;DBI:mysql:database=$db_name;host=$db_host&quot;,
+        $db_user, $db_pass, {RaiseError =&gt; 1});</pre>
+<pre>
+  my $sql = new XMLSQL($dbh);</pre>
+<pre>
+  my @field_list = ('col1', 'col2', 'col3', 'col4');
+  my @where = ('col3 = &quot;abc&quot;', 'col4 = &quot;def&quot;');
+  my @group_by = ('col1', 'col3');
+  my @order_by = ('col1');
+  my %group_par = (
+          col1 =&gt; 'col4, col5',
+  );
+  my %attribs = ('col5');</pre>
+<pre>
+  my $ret = $sql-&gt;select2(\@field_list, 'table1 join table2 on a=b',\@where,\@group_by,\@order_by,\%group_par,\@attribs);
+  # $ret &lt; 0 -&gt; error
+  my $str = $sql-&gt;value;</pre>
+<p>
+</p>
+<hr />
+<h1><a name="description">DESCRIPTION</a></h1>
+<p><code>XMLSQL</code> package executes SQL query and returns XML string as a result.</p>
+<p>Returned XML document has the following tree structure:</p>
+<pre>
+ XMLSQL (version=1.1)
+    |
+    +- SQL
+    |
+    +- result (rows=n)
+    |    |
+    |    +-- group_by (field=abc)
+    |           |
+    |        +-- group_by (field=xyz)
+    |        |      .
+    |        |      .
+    |        |      .
+    |        |      |
+    |        |      +- row
+    |        +-- group_by
+    |        
+    +-- status (code=n codevar=errstr)
+    |
+    +-- generated (timestamp=n year=n month=n day=n min=n sec=n)</pre>
+<p>Parameters are in brackets, <code>n</code> denotes positive integer value; 
+<code>abc</code>, <code>xyz</code> string value, <code>errstr</code> is either <code>STATUS_Ok</code> or <code>STATUS_SQL</code> 
+with error description in <code>&lt;status&gt;</code> body.</p>
+<p>
+</p>
+<hr />
+<h1><a name="methods">METHODS</a></h1>
+<dl>
+<dt><strong><a name="item_new"><code>new($dbh)</code></a></strong><br />
+</dt>
+<dd>
+Create a new <code>XMLSQL</code> object.
+</dd>
+<dd>
+<p><code>$dbh</code> is a database handle.</p>
+</dd>
+<p></p>
+<dt><strong><a name="item_select"><code>select()</code></a></strong><br />
+</dt>
+<dd>
+Execute SQL query.
+</dd>
+<p></p>
+<dt><strong><a name="item_select2"><code>select2()</code></a></strong><br />
+</dt>
+<dd>
+Execute SQL query.
+</dd>
+<p></p>
+<dt><strong><a name="item_value"><code>value()</code></a></strong><br />
+</dt>
+<dd>
+Return generated XML document
+</dd>
+<p></p></dl>
+<p>
+</p>
+<hr />
+<h1><a name="author">AUTHOR</a></h1>
+<p>Tomas Zeman &lt;<a href="mailto:tzeman@volny.cz">tzeman@volny.cz</a>&gt;</p>
+<p>$Id: XMLSQL.pm 8 2005-02-02 09:58:38Z zeman $
+</p>
+
