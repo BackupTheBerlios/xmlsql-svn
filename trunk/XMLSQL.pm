@@ -443,7 +443,10 @@ Return generated XML document
 
 
 
-=over 4
+
+
+=back
+
 
 =head1 AUTHOR
 
