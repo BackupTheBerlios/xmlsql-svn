@@ -444,3 +444,9 @@ Return generated XML document
 
 
 =over 4
+
+=head1 AUTHOR
+
+Tomas Zeman <tzeman@volny.cz>
+
+$Id$
